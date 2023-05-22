@@ -1,0 +1,33 @@
+---
+title: "Project Proposal"
+output: html_document
+date: "2023-05-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Data retrieved from https://www.ncdrisc.org/data-downloads-diabetes.html 
+
+
+```{r}
+# Load libraries:
+library(tidyverse)
+```
+
+```{r}
+# Read in Data 
+
+data <- read_csv("Data/Diabetes_data.csv")
+```
+
+Assessment requires only 5 variables and 1000 rows. 
+
+```{r}
+# Reduce size of Data 
+# remove variables "ISO"
+
+head(data)
+```
+
