@@ -127,3 +127,13 @@ ggplotly(Figure_2)
 
 - *There is a slight increase in mean diabetes prevalence from 1980 to 2014*
 - *The standard deviation bars indicate a high dispersion of data* 
+
+# Conclusions 
+
+- When grouping diabetes prevalence by year, mean diabates prevalence appears to have a positive trend over time. 
+- This positive trend also includes fluctuations over years. 
+- 2009 has the highest diabetes prevalence, whereas 1981 has the lowest. 
+- The standard deviations for each year are high indicating a high dispersion of data. 
+- The next investigation would be to look at indivudal countries or grouping by sex. 
+- These results were also calculated from only 1000 entries of a full dataset containing 14,000 entries. 
+    - Possible error could be due to the random generation of rows and skew results. 
