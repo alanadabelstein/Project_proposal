@@ -15,6 +15,7 @@ The aim of this analysis is to investigate diabetes prevalence over time and by 
 library(tidyverse)
 library(gridExtra)
 library(knitr)
+library(plotly)
 ```
 
 # Dataset Introduction 
@@ -102,3 +103,27 @@ kable(tail_data_summary,
 ```
 
 From **Table 2** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean diabetes prevalence at 11.1% from the period 2005 to 2014, but also the highest standard deviation**. 
+
+# Visualisations 
+
+A figure was created using the ggplot2 R package and the option geom_point(). This is displayed in **Figure 2:**
+
+```{r warning=FALSE, message=FALSE}
+Figure_2 <- ggplot(data = data_summary, aes(x = Year, y = mean_diabetes)) + 
+  geom_point(alpha = 0.7) + 
+  labs(title = "Figure 2: Mean Diabetes Prevalence Increases Over Time", 
+       caption = "geom_smooth(` using method = 'loess' and formula = 'y ~ x'",
+       subtitle = "Red Bars Represent Standard Deviation") + 
+  xlab("Year") + 
+  ylab("Mean Diabetes Prevalence") + 
+  theme_minimal() + 
+  geom_smooth() + 
+  geom_errorbar(aes(ymin=mean_diabetes-sd_diabetes, ymax=mean_diabetes+sd_diabetes), colour="red", alpha=0.3)
+
+ggplotly(Figure_2)
+```
+
+### Figure 2 Summary 
+
+- *There is a slight increase in mean diabetes prevalence from 1980 to 2014*
+- *The standard deviation bars indicate a high dispersion of data* 
