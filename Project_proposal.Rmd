@@ -4,30 +4,58 @@ output: html_document
 date: "2023-05-22"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
-Data retrieved from https://www.ncdrisc.org/data-downloads-diabetes.html 
+# Research Question
+
+The aim of this analysis is to investigate diabetes prevalence over time and by country/region. The purpose is to identify countries and years with high diabetes prevalence. 
 
 
-```{r}
+```{r warning = FALSE, message = FALSE, include = FALSE}
 # Load libraries:
 library(tidyverse)
+library(gridExtra)
+library(knitr)
 ```
+
+# Dataset Introduction 
+
+The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org/data-downloads-diabetes.html) is a global dataset of diabetes prevelance from the years 1980 to 2014 and contains a total of 14,000 observations and 7 variables: 
+- "Country/Region/World", 
+        - *e.g. "Turkey",  "Bangladesh", "New Zealand"*
+- "ISO", 
+    - *A region code for international standard denominations for country subdivisions*
+- "Sex", 
+    - *Two factor variable "Men" or "Women"*
+- "Year", 
+    - *Ranges from 1980 to 2014*
+- "Age-standardised diabetes prevalence", 
+    - *Calculated as a percentage*
+- "Lower 95% uncertainty interval" and 
+- "Upper 95% uncertainty interval". 
+**Table 1** below shows the variables and their attributes. 
+
 
 ```{r}
 # Read in Data 
 
-data <- read_csv("Data/Diabetes_data.csv")
-```
+data_full <- read_csv("Data/Diabetes_data.csv")
 
-Assessment requires only 5 variables and 1000 rows. 
+data_full_head <- head(data_full)
 
-```{r}
+kable(data_full_head, 
+             caption = "First Six Observations of the Full Diabetes Dataset",
+             digits = 2)
+
 # Reduce size of Data 
-# remove variables "ISO"
 
-head(data)
+data <- data_full[sample(nrow(data_full), 1000), ] 
+
+data <- data %>%
+  select("Country/Region/World", "Sex", "Year", "Age-standardised diabetes prevalence", "Lower 95% uncertainty interval", "Upper 95% uncertainty interval") %>%
+  rename(diabetes_prevalence = `Age-standardised diabetes prevalence`, 
+         lower_95 = `Lower 95% uncertainty interval`, 
+         upper_95 = `Upper 95% uncertainty interval`)
 ```
 
+
+This data was reduced to **1000** observations through a random generation of row numbers. The variable "ISO" was removed as it was not necessary for analysis. 
