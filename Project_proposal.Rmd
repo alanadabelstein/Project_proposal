@@ -21,6 +21,7 @@ library(plotly)
 # Dataset Introduction 
 
 The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org/data-downloads-diabetes.html) is a global dataset of diabetes prevelance from the years 1980 to 2014 and contains a total of 14,000 observations and 7 variables: 
+
 - "Country/Region/World", 
         - *e.g. "Turkey",  "Bangladesh", "New Zealand"*
 - "ISO", 
@@ -67,7 +68,7 @@ data <- data %>%
 ```
 
 
-```{r fig.cap="Figure 1: Code Screenshot of Data Tidying", fig.align="centre", out.width="50"}
+```{r fig.cap="Figure 1: Code Screenshot of Data Tidying", fig.align="centre"}
 include_graphics("Image/code_screenshot.png")
 ```
 
