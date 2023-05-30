@@ -67,7 +67,7 @@ data <- data %>%
 ```
 
 
-```{r fig.cap = “Figure 1: Code Screenshot of Data Tidying”, fig.align='center', out.width="50"}
+```{r fig.cap="Figure 1: Code Screenshot of Data Tidying", fig.align="centre", out.width="50"}
 include_graphics("Image/code_screenshot.png")
 ```
 
@@ -164,7 +164,7 @@ Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence ove
 
 # Mean Diabetes Prevalence by Country
 
-```{r table3, warning=FALSE, message=False}
+```{r table3, warning=FALSE, message=FALSE}
 Australia_table_summary <- data_full %>%
   filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
   select(-ISO) %>%
