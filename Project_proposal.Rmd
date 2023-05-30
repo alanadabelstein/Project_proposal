@@ -159,4 +159,4 @@ Figure_3
 
 ```
 
-Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence over time. Men have a noticably higher mean than women. There is a steeper increase from 1980 to 2000 and then a plateau. 
+Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2010. It is unknown whether the plateua begins to trend downards. 
