@@ -140,7 +140,7 @@ ggplotly(Figure_2)
     
 # Mean Diabetes Prevalence by Country
 
-```{r table3}
+```{r table3, warning=FALSE, message=False}
 Australia_table_summary <- data_full %>%
   filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
   select(-ISO) %>%
