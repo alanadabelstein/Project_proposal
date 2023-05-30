@@ -137,3 +137,18 @@ ggplotly(Figure_2)
 - The next investigation would be to look at indivudal countries or grouping by sex. 
 - These results were also calculated from only 1000 entries of a full dataset containing 14,000 entries. 
     - Possible error could be due to the random generation of rows and skew results. 
+    
+# Mean Diabetes Prevalence by Country
+
+```{r}
+Australia_table_summary <- data_full %>%
+  filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
+  select(-ISO) %>%
+  group_by(`Country/Region/World`, Sex) %>%
+  summarise(`Mean diabetes prevalence` = mean(`Age-standardised diabetes prevalence`))
+  
+kable(Australia_table_summary, 
+             caption = "Table 1: First Six Observations of the Full Diabetes Dataset",
+             digits = 2)
+```
+
