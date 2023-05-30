@@ -140,7 +140,7 @@ ggplotly(Figure_2)
     
 # Mean Diabetes Prevalence by Country
 
-```{r}
+```{r table3}
 Australia_table_summary <- data_full %>%
   filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
   select(-ISO) %>%
@@ -152,4 +152,4 @@ kable(Australia_table_summary,
              digits = 3)
 ```
 
-Five random countries were selected to compare mean diabetese prevalence by year and sex. It is seen that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabates prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+Five random countries were selected to compare mean diabetes prevalence by year and sex. Table 3 \@ref(table3) presents that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
