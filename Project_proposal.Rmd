@@ -5,7 +5,7 @@ date: "2023-05-22"
 ---
 
 
-# Changing the first title to create a conflict 
+# Research Question
 
 The aim of this analysis is to investigate diabetes prevalence over time and by country/region. The purpose is to identify countries and years with high diabetes prevalence. 
 
@@ -160,3 +160,21 @@ Figure_3
 ```
 
 Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2010. It is unknown whether the plateua begins to trend downards. 
+
+
+# Mean Diabetes Prevalence by Country
+
+```{r table3, warning=FALSE, message=False}
+Australia_table_summary <- data_full %>%
+  filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
+  select(-ISO) %>%
+  group_by(`Country/Region/World`, Sex) %>%
+  summarise(`Mean diabetes prevalence` = mean(`Age-standardised diabetes prevalence`))
+  
+kable(Australia_table_summary, 
+             caption = "Table 1: First Six Observations of the Full Diabetes Dataset",
+             digits = 3)
+```
+
+Five random countries were selected to compare mean diabetes prevalence by year and sex. Table 3 \@ref(table3) presents that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+
