@@ -141,7 +141,7 @@ ggplotly(Figure_2)
     
 # Australian Diabates Trends By Sex  
 
-```{r figure3, warning=FALSE}
+```{r figure3, warning=FALSE, message=FALSE}
 Australia_summary <- data_full %>%
   filter(`Country/Region/World` == "Australia")
 
