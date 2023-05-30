@@ -1,6 +1,6 @@
 ---
 title: "Project Proposal"
-output: html_document
+output: bookdown::html_document2
 date: "2023-05-22"
 ---
 
@@ -16,6 +16,7 @@ library(tidyverse)
 library(gridExtra)
 library(knitr)
 library(plotly)
+library(bookdown)
 ```
 
 # Dataset Introduction 
@@ -34,6 +35,7 @@ The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org
     - *Calculated as a percentage*
 - "Lower 95% uncertainty interval" and 
 - "Upper 95% uncertainty interval". 
+
 **Table 1** below shows the first six observations of the full dataset. 
 
 
@@ -129,16 +131,6 @@ ggplotly(Figure_2)
 - *There is a slight increase in mean diabetes prevalence from 1980 to 2014*
 - *The standard deviation bars indicate a high dispersion of data* 
 
-# Conclusions 
-
-- When grouping diabetes prevalence by year, mean diabates prevalence appears to have a positive trend over time. 
-- This positive trend also includes fluctuations over years. 
-- 2009 has the highest diabetes prevalence, whereas 1981 has the lowest. 
-- The standard deviations for each year are high indicating a high dispersion of data. 
-- The next investigation would be to look at indivudal countries or grouping by sex. 
-- These results were also calculated from only 1000 entries of a full dataset containing 14,000 entries. 
-    - Possible error could be due to the random generation of rows and skew results. 
-    
     
 # Australian Diabates Trends By Sex  
 
@@ -160,7 +152,7 @@ Figure_3
 
 ```
 
-Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2010. It is unknown whether the plateua begins to trend downards. 
+Figure 3 shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2010. It is unknown whether the plateua begins to trend downards. 
 
 
 # Mean Diabetes Prevalence by Country
@@ -177,5 +169,19 @@ kable(Australia_table_summary,
              digits = 3)
 ```
 
-Five random countries were selected to compare mean diabetes prevalence by year and sex. Table 3 \@ref(table3) presents that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+Five random countries were selected to compare mean diabetes prevalence by year and sex. Table 3 presents that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+
+# Conclusions 
+
+- When grouping diabetes prevalence by year, mean diabates prevalence appears to have a positive trend over time. 
+- This positive trend also includes fluctuations over years. 
+- 2009 has the highest diabetes prevalence, whereas 1981 has the lowest. 
+- The standard deviations for each year are high indicating a high dispersion of data. 
+- The next investigation would be to look at indivudal countries or grouping by sex. 
+- These results were also calculated from only 1000 entries of a full dataset containing 14,000 entries. 
+    - Possible error could be due to the random generation of rows and skew results. 
+    
+
+\@ref(figure3)
+\@ref(table3)
 
