@@ -139,9 +139,9 @@ ggplotly(Figure_2)
     - Possible error could be due to the random generation of rows and skew results. 
     
     
-# Branch 1 Figure 
+# Australian Diabates Trends By Sex  
 
-```{r}
+```{r figure3}
 Australia_summary <- data_full %>%
   filter(`Country/Region/World` == "Australia")
 
@@ -159,3 +159,4 @@ Figure_3
 
 ```
 
+Figure 3 \@ref(figure3) shows a trend of increasing mean diabates prevalence over time. Men have a noticably higher mean than women. There is a steeper increase from 1980 to 2000 and then a plateau. 
