@@ -141,12 +141,12 @@ ggplotly(Figure_2)
     
 # Australian Diabates Trends By Sex  
 
-```{r figure3}
+```{r figure3, warning=FALSE}
 Australia_summary <- data_full %>%
   filter(`Country/Region/World` == "Australia")
 
 Figure_3 <- ggplot(data = Australia_summary, aes(x = Year, y = `Age-standardised diabetes prevalence`, col = Sex)) + 
-  geom_point(alpha = 0.7) + 
+  geom_point(alpha = 0.8) + 
   labs(title = "Figure 3: Men have Higher Risk of Diabetes", 
        caption = "geom_smooth(` using method = 'loess' and formula = 'y ~ x'",
        subtitle = "Mean Diabetes Prevalence Has Increased Over Time") + 
