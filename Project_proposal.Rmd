@@ -39,7 +39,7 @@ The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org
 **Table 1** below shows the first six observations of the full dataset. 
 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 # Read in Data 
 
 data_full <- read_csv("Data/Diabetes_data.csv")
@@ -83,7 +83,7 @@ str(head_data_2)
 
 # Data Summary {#table2}
 
-Two summary statistics were calculated for diabetes prevalence by "Year". **Table 2** shows the results of the summary statistics. 
+Mean and standard deviation were calculated for diabetes prevalence by "Year". **Table 2** shows the results of the summary statistics. *This section requires grouping by a factor/character variable. 'Year' is a numerical variable but was chosen here to better reflect the research question*. 
 
 ```{r message=FALSE, warning=FALSE}
 data_summary <- data %>%
@@ -105,7 +105,7 @@ kable(tail_data_summary,
       row_number(10))
 ```
 
-From **Table 2** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean diabetes prevalence at 11.1% from the period 2005 to 2014, but also the highest standard deviation**. 
+From **Table 2** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean** diabetes prevalence at 11.1% from the period 2005 to 2014, but also the **highest standard deviation**. 
 
 # Visualisations {#figure2}
 
@@ -182,7 +182,7 @@ Five random countries were selected to compare mean diabetes prevalence by year 
     - Possible error could be due to the random generation of rows and skew results. 
 - Australian men have a higher mean diabetes prevalence than women \@ref(figure3)
 - Although Australian men have higher diabetes prevalence, it is not the case for all countries. For example South African women have a higher mean diabetes prevalence than men \@ref(table3). 
-- ***add reason why this is important*** 
+- Diabetes can cause life-threatening health complications, therefore identifying high prevalence groups can aid in prevention and treatment. 
     
 
 
