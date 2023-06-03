@@ -44,7 +44,7 @@ The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org
 # Read in Data 
 data_full <- read_csv("Data/Diabetes_data.csv")
 
-# create variable of for first observations
+# create variable for first observations
 data_full_head <- head(data_full)
 
 # display in table
@@ -60,6 +60,7 @@ The full dataset was reduced to **1000** observations through a random generatio
 
 ```{r include = FALSE}
 # Reduce size of Data 
+set.seed(123)
 
 data <- data_full[sample(nrow(data_full), 1000), ] 
 
@@ -87,18 +88,17 @@ str(head_data_2)
 
 # Data Summary {#table2}
 
-Mean and standard deviation were calculated for diabetes prevalence by "Year". **Table 4.1** shows the results of the summary statistics. *This section requires grouping by a factor/character variable. 'Year' is a numerical variable but was chosen here to better reflect the research question*. 
+Mean, median, standard deviation and the maximum/minimum were calculated for diabetes prevalence by "Year". **Table 4.1** shows the results of the summary statistics. *This section requires grouping by a factor/character variable. 'Year' is a numerical variable but was chosen here to better reflect the research question*. 
 
 ```{r message=FALSE, warning=FALSE}
 # group data by year and create summary statistics
 data_summary <- data %>%
   group_by(Year) %>%
   summarise(mean_diabetes = mean(diabetes_prevalence), 
+            median_diabetes = median(diabetes_prevalence),
             sd_diabetes = sd(diabetes_prevalence), 
-            mean_upper95 = mean(upper_95), 
-            sd_upper95 = sd(upper_95), 
-            mean_lower95 = sd(lower_95), 
-            sd_lower95 = sd(lower_95))
+            max_diabetes = max(diabetes_prevalence), 
+            min_diabetes = min(diabetes_prevalence))
 ```
 
 ```{r}
@@ -112,7 +112,7 @@ kable(tail_data_summary,
       row_number(10))
 ```
 
-From **Table 4.1** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean** diabetes prevalence at 11.1% from the period 2005 to 2014, but also the **highest standard deviation**. 
+From **Table 4.1** there does not appear to be a trend in mean diabetes prevalence from 2005 to 2014. **2011 had the highest mean** diabetes prevalence at 11.5% from the period 2005 to 2014, but also the **highest standard deviation**. The maximum global diabetes prevalence was recorded in 2006 and 2008 at 31.2%. The lowest minimum was recorded in 2014 at 3.2%. 
 
 # Visualisations {#figure2}
 
@@ -120,17 +120,18 @@ From **Table 4.1** we can see an increasing trend in mean diabetes prevalence fr
 
 A figure was created using the ggplot2 R package and the option geom_point(). This is displayed in **Figure 5.1:**
 
-```{r warning=FALSE, message=FALSE, fig.cap="Mean Diabetes Prevalence Increases Over Time", fig.subcap="geom_smooth using method 'loess' and formula 'y ~ x', Red Bars Represent Standard Deviation"}
+```{r warning=FALSE, message=FALSE, fig.cap="Mean Diabetes Prevalence from 1980 to 2014", fig.align='center'}
 
 Figure_2 <- ggplot(data = data_summary, aes(x = Year, y = mean_diabetes)) + 
   geom_point(alpha = 0.7) + 
   xlab("Year") + 
   ylab("Mean Diabetes Prevalence") + 
   theme_minimal() + 
+  labs(title = "Mean Diabetes Prevalence Increases Over Time", subtitle = "Red Bars Represent Standard Deviation", caption = " geom_smooth using method 'loess' and formula 'y ~ x' ") +
   geom_smooth() + 
   geom_errorbar(aes(ymin=mean_diabetes-sd_diabetes, ymax=mean_diabetes+sd_diabetes), colour="red", alpha=0.3)
 
-ggplotly(Figure_2)
+Figure_2
 ```
 
 
@@ -138,9 +139,9 @@ ggplotly(Figure_2)
 - *The standard deviation bars indicate a high dispersion of data* 
 
     
-## Australian Diabates Trends By Sex {#figure3}
+## Australian Diabetes Trends By Sex {#figure3}
 
-```{r figure3, warning=FALSE, message=FALSE, fig.cap="Men have Higher Risk of Diabetes", fig.subcap="Mean Diabetes Prevalence Has Increased Over Time, geom_smooth using method 'loess' and formula = 'y ~ x' "}
+```{r figure3, warning=FALSE, message=FALSE, fig.cap="Australian Diabetes Prevalence from 1980-2014", fig.align='center'}
 
 # first filter for australian data
 Australia_summary <- data_full %>%
@@ -150,6 +151,7 @@ Figure_3 <- ggplot(data = Australia_summary, aes(x = Year, y = `Age-standardised
   geom_point(alpha = 0.8) + 
   xlab("Year") + 
   ylab("Mean Diabetes Prevalence") + 
+  labs(title = "Men have Higher Risk of Diabetes", subtitle = "Mean Diabetes Prevalence Has Increased Over Time", caption = "geom_smooth using method 'loess' and formula = 'y ~ x' ") +
   theme_minimal() + 
   geom_smooth()
 
@@ -179,11 +181,13 @@ Five random countries were selected to compare mean diabetes prevalence by year 
 
 # Conclusions 
 
-- When grouping diabetes prevalence by year, mean diabates prevalence appears to have a positive trend over time \@ref(figure2). 
-  - This positive trend also includes fluctuations over years. 
-- 2009 has the highest diabetes prevalence, whereas 1981 has the lowest \@ref(table2). 
+- When grouping diabetes prevalence by year, mean diabates prevalence does not show a clear trend \@ref(figure2). 
+  - There are many fluctuations over years. 
+  - without grouping by country or sex, it is difficult to determine years with high diabetes prevalence. 
+- 2011 has the highest diabetes prevalence, whereas 2014 has the lowest for the period 2005-2014 \@ref(table2). 
+  - When comparing to the median, 2005 had the highest median diabetes prevalence and 2012 had the lowest. 
   - The standard deviations for each year are high indicating a high dispersion of data. 
-- The results for diabetes prevelance over time \@ref(DPT) were calculated from only 1000 entries of a full dataset containing 14,000 entries. 
+- The results for diabetes prevalence over time \@ref(DPT) were calculated from only 1000 entries of a full dataset containing 14,000 entries. 
     - Possible error could be due to the random generation of rows and skew results. 
 - Australian men have a higher mean diabetes prevalence than women \@ref(figure3)
 - Although Australian men have higher diabetes prevalence, it is not the case for all countries. For example South African women have a higher mean diabetes prevalence than men \@ref(table3). 
