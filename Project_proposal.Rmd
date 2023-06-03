@@ -116,7 +116,7 @@ From **Table 4.1** we can see an increasing trend in mean diabetes prevalence fr
 
 # Visualisations {#figure2}
 
-## Diabetes Prevalence Over Time
+## Diabetes Prevalence Over Time {#DPT}
 
 A figure was created using the ggplot2 R package and the option geom_point(). This is displayed in **Figure 5.1:**
 
@@ -180,11 +180,10 @@ Five random countries were selected to compare mean diabetes prevalence by year 
 # Conclusions 
 
 - When grouping diabetes prevalence by year, mean diabates prevalence appears to have a positive trend over time \@ref(figure2). 
-- This positive trend also includes fluctuations over years. 
+  - This positive trend also includes fluctuations over years. 
 - 2009 has the highest diabetes prevalence, whereas 1981 has the lowest \@ref(table2). 
-- The standard deviations for each year are high indicating a high dispersion of data. 
-- The next investigation would be to look at indivudal countries or grouping by sex. 
-- These results were also calculated from only 1000 entries of a full dataset containing 14,000 entries. 
+  - The standard deviations for each year are high indicating a high dispersion of data. 
+- The results for diabetes prevelance over time \@ref(DPT) were calculated from only 1000 entries of a full dataset containing 14,000 entries. 
     - Possible error could be due to the random generation of rows and skew results. 
 - Australian men have a higher mean diabetes prevalence than women \@ref(figure3)
 - Although Australian men have higher diabetes prevalence, it is not the case for all countries. For example South African women have a higher mean diabetes prevalence than men \@ref(table3). 
