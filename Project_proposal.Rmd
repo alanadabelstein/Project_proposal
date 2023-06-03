@@ -1,9 +1,10 @@
 ---
-title: "Project Proposal"
+title: "Project Proposal: Diabetes Prevelance by Country, Sex and Year"
 output: 
   bookdown::html_document2:
    theme: readable
 date: "2023-05-22"
+author: Alana Dabelstein 33373973 
 ---
 
 ```{r warning = FALSE, message = FALSE, include = FALSE}
@@ -24,37 +25,38 @@ The aim of this analysis is to investigate diabetes prevalence over time. The an
 The dataset ['DIABETES evolution of diabetes over time'](https://www.ncdrisc.org/data-downloads-diabetes.html) is a global dataset of diabetes prevelance from the years 1980 to 2014 and contains a total of 14,000 observations and 7 variables: 
 
 - "Country/Region/World", 
-        - *e.g. "Turkey",  "Bangladesh", "New Zealand"*
+  - *e.g. "Turkey",  "Bangladesh", "New Zealand"*
 - "ISO", 
-    - *A region code for international standard denominations for country subdivisions*
+  - *A region code for international standard denominations for country subdivisions*
 - "Sex", 
-    - *Two factor variable "Men" or "Women"*
+  - *Two factor variable "Men" or "Women"*
 - "Year", 
-    - *Ranges from 1980 to 2014*
+  - *Ranges from 1980 to 2014*
 - "Age-standardised diabetes prevalence", 
-    - *Calculated as a percentage*
+  - *Calculated as a percentage*
 - "Lower 95% uncertainty interval" and 
 - "Upper 95% uncertainty interval". 
 
-**Table 1** below shows the first six observations of the full dataset. 
+**Table 2.1** below shows the first six observations of the full dataset. 
 
 
 ```{r warning=FALSE, message=FALSE}
 # Read in Data 
-
 data_full <- read_csv("Data/Diabetes_data.csv")
 
+# create variable of for first observations
 data_full_head <- head(data_full)
 
+# display in table
 kable(data_full_head, 
-             caption = "Table 1: First Six Observations of the Full Diabetes Dataset",
+             caption = "First Six Observations of the Full Diabetes Dataset",
              digits = 2)
 
 ```
 
 # Dataset Description 
 
-The full dataset was reduced to **1000** observations through a random generation of row numbers. The variable "ISO" was removed as it was not necessary for analysis. The reduced data has 6 variables (*Although the limit is 5 variables, I considered the lower and upper 95% confidence interval variables as one variable*). **Figure 1** below shows the code used to tidy the full dataset into the reduced dataset. 
+The full dataset was reduced to **1000** observations through a random generation of row numbers. The variable "ISO" was removed as it was not necessary for analysis. The reduced data has 6 variables (*Although the limit is 5 variables, I considered the lower and upper 95% confidence interval variables as one variable*). **Figure 3.1** below shows the code used to tidy the full dataset into the reduced dataset. 
 
 ```{r include = FALSE}
 # Reduce size of Data 
@@ -70,22 +72,25 @@ data <- data %>%
 ```
 
 
-```{r fig.cap="Figure 1: Code Screenshot of Data Tidying", fig.align="centre"}
+```{r fig.cap="Code Screenshot of Data Tidying", fig.align="centre"}
 include_graphics("Image/code_screenshot.png")
 ```
 
 Using the function **str()** the first 2 rows of the data is displayed to show the type of variables in the data set (numeric, character/factor etc.).
 
 ```{r}
+# first display only first 2 rows
 head_data_2 <- head(data,2)
+
 str(head_data_2)
 ```
 
 # Data Summary {#table2}
 
-Mean and standard deviation were calculated for diabetes prevalence by "Year". **Table 2** shows the results of the summary statistics. *This section requires grouping by a factor/character variable. 'Year' is a numerical variable but was chosen here to better reflect the research question*. 
+Mean and standard deviation were calculated for diabetes prevalence by "Year". **Table 4.1** shows the results of the summary statistics. *This section requires grouping by a factor/character variable. 'Year' is a numerical variable but was chosen here to better reflect the research question*. 
 
 ```{r message=FALSE, warning=FALSE}
+# group data by year and create summary statistics
 data_summary <- data %>%
   group_by(Year) %>%
   summarise(mean_diabetes = mean(diabetes_prevalence), 
@@ -97,26 +102,28 @@ data_summary <- data %>%
 ```
 
 ```{r}
+# display only 10 observations (latest years)
 tail_data_summary <- tail(data_summary, 10)
 
+# create table
 kable(tail_data_summary, 
-             caption = "Table 2: Mean and Standard Deviation of Diabetes Prevalence by Year (First 10 Rows)",
+             caption = "Mean and Standard Deviation of Diabetes Prevalence by Year (First 10 Rows)",
              digits = 3, 
       row_number(10))
 ```
 
-From **Table 2** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean** diabetes prevalence at 11.1% from the period 2005 to 2014, but also the **highest standard deviation**. 
+From **Table 4.1** we can see an increasing trend in mean diabetes prevalence from 2005 to 2014. **2009 had the highest mean** diabetes prevalence at 11.1% from the period 2005 to 2014, but also the **highest standard deviation**. 
 
 # Visualisations {#figure2}
 
-A figure was created using the ggplot2 R package and the option geom_point(). This is displayed in **Figure 2:**
+## Diabetes Prevalence Over Time
 
-```{r warning=FALSE, message=FALSE}
+A figure was created using the ggplot2 R package and the option geom_point(). This is displayed in **Figure 5.1:**
+
+```{r warning=FALSE, message=FALSE, fig.cap="Mean Diabetes Prevalence Increases Over Time", fig.subcap="geom_smooth using method 'loess' and formula 'y ~ x', Red Bars Represent Standard Deviation"}
+
 Figure_2 <- ggplot(data = data_summary, aes(x = Year, y = mean_diabetes)) + 
   geom_point(alpha = 0.7) + 
-  labs(title = "Figure 2: Mean Diabetes Prevalence Increases Over Time", 
-       caption = "geom_smooth(` using method = 'loess' and formula = 'y ~ x'",
-       subtitle = "Red Bars Represent Standard Deviation") + 
   xlab("Year") + 
   ylab("Mean Diabetes Prevalence") + 
   theme_minimal() + 
@@ -126,23 +133,21 @@ Figure_2 <- ggplot(data = data_summary, aes(x = Year, y = mean_diabetes)) +
 ggplotly(Figure_2)
 ```
 
-### Figure 2 Summary 
 
 - *There is a slight increase in mean diabetes prevalence from 1980 to 2014*
 - *The standard deviation bars indicate a high dispersion of data* 
 
     
-# Australian Diabates Trends By Sex {#figure3}
+## Australian Diabates Trends By Sex {#figure3}
 
-```{r figure3, warning=FALSE, message=FALSE}
+```{r figure3, warning=FALSE, message=FALSE, fig.cap="Men have Higher Risk of Diabetes", fig.subcap="Mean Diabetes Prevalence Has Increased Over Time, geom_smooth using method 'loess' and formula = 'y ~ x' "}
+
+# first filter for australian data
 Australia_summary <- data_full %>%
   filter(`Country/Region/World` == "Australia")
 
 Figure_3 <- ggplot(data = Australia_summary, aes(x = Year, y = `Age-standardised diabetes prevalence`, col = Sex)) + 
   geom_point(alpha = 0.8) + 
-  labs(title = "Figure 3: Men have Higher Risk of Diabetes", 
-       caption = "geom_smooth(` using method = 'loess' and formula = 'y ~ x'",
-       subtitle = "Mean Diabetes Prevalence Has Increased Over Time") + 
   xlab("Year") + 
   ylab("Mean Diabetes Prevalence") + 
   theme_minimal() + 
@@ -152,12 +157,13 @@ Figure_3
 
 ```
 
-Figure 3 shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2010. It is unknown whether the plateua begins to trend downards. 
+Figure 5.2 shows a trend of increasing mean diabates prevalence over time. Men have a noticeably higher mean than women. There is a steep increase from 1980 to 2000 and then a plateau. Data was only available up to 2014. It is unknown whether the plateua begins to trend downwards. 
 
 
-# Mean Diabetes Prevalence by Country {#table3}
+## Mean Diabetes Prevalence by Country {#table3}
 
 ```{r table3, warning=FALSE, message=FALSE}
+# filter for five countries and group by sex 
 Australia_table_summary <- data_full %>%
   filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
   select(-ISO) %>%
@@ -165,11 +171,11 @@ Australia_table_summary <- data_full %>%
   summarise(`Mean diabetes prevalence` = mean(`Age-standardised diabetes prevalence`))
   
 kable(Australia_table_summary, 
-             caption = "Table 1: First Six Observations of the Full Diabetes Dataset",
+             caption = "First Six Observations of the Full Diabetes Dataset",
              digits = 3)
 ```
 
-Five random countries were selected to compare mean diabetes prevalence by year and sex. Table 3 presents that in Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+Five random countries were selected to compare mean diabetes prevalence by year and sex. In Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
 
 # Conclusions 
 
