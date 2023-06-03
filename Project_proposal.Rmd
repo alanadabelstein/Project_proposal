@@ -6,12 +6,6 @@ output:
 date: "2023-05-22"
 ---
 
-
-# Research Question
-
-The aim of this analysis is to investigate diabetes prevalence over time and by country/region. The purpose is to identify countries and years with high diabetes prevalence. 
-
-
 ```{r warning = FALSE, message = FALSE, include = FALSE}
 # Load libraries:
 library(tidyverse)
@@ -20,6 +14,10 @@ library(knitr)
 library(plotly)
 library(bookdown)
 ```
+
+# Research Question
+
+The aim of this analysis is to investigate diabetes prevalence over time. The analysis looks at the variables year, country and sex to identify groups with high diabetes prevalence. 
 
 # Dataset Introduction 
 
@@ -56,7 +54,7 @@ kable(data_full_head,
 
 # Dataset Description 
 
-The full dataset was reduced to **1000** observations through a random generation of row numbers. The variable "ISO" was removed as it was not necessary for analysis.** Figure 1** below shows the code used to tidy the full dataset into the reduced dataset. 
+The full dataset was reduced to **1000** observations through a random generation of row numbers. The variable "ISO" was removed as it was not necessary for analysis. The reduced data has 6 variables (*Although the limit is 5 variables, I considered the lower and upper 95% confidence interval variables as one variable*). **Figure 1** below shows the code used to tidy the full dataset into the reduced dataset. 
 
 ```{r include = FALSE}
 # Reduce size of Data 
@@ -76,7 +74,7 @@ data <- data %>%
 include_graphics("Image/code_screenshot.png")
 ```
 
-Using the function **str()** the first 2 rows of the data is displayed to show the type of variables in the data set (numeric, character/factor etc.). The assessment requires a maximum of **5** variables, but both the "lower_95" and "upper_95" were kept as they work together. 
+Using the function **str()** the first 2 rows of the data is displayed to show the type of variables in the data set (numeric, character/factor etc.).
 
 ```{r}
 head_data_2 <- head(data,2)
