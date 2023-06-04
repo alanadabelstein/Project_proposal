@@ -192,7 +192,7 @@ Each country was grouped to produce a mean diabetes prevalence and then were ran
 - 2011 has the highest diabetes prevalence, whereas 2014 has the lowest for the period 2005-2014 \@ref(table2). 
   - When comparing to the median, 2005 had the highest median diabetes prevalence and 2012 had the lowest. 
   - The standard deviations for each year are high indicating a high dispersion of data. 
-- The results for diabetes prevalence over time \@ref(DPT) were calculated from only 1000 entries of a full dataset containing 14,000 entries. 
+- The results for diabetes prevalence over time were calculated from only 1000 entries of a full dataset containing 14,000 entries. \@ref(DPT) 
     - Possible error could be due to the random generation of rows and skew results. 
 - Australian men have a higher mean diabetes prevalence than women \@ref(figure3)
 - The global data indicates that Nauru had the highest mean diabetes prevalence for the period 1980-2014 \@ref(table3). 
