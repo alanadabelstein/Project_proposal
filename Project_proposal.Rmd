@@ -1,5 +1,5 @@
 ---
-title: "Project Proposal: Diabetes Prevelance by Country, Sex and Year"
+title: "Diabetes Prevelance by Country, Sex and Year"
 output: 
   bookdown::html_document2:
    theme: readable
@@ -164,20 +164,25 @@ Figure 5.2 shows a trend of increasing mean diabates prevalence over time. Men h
 
 ## Mean Diabetes Prevalence by Country {#table3}
 
-```{r table3, warning=FALSE, message=FALSE}
-# filter for five countries and group by sex 
-Australia_table_summary <- data_full %>%
-  filter(`Country/Region/World` %in% c("Australia", "Germany", "China", "South Africa", "United States of America")) %>%
-  select(-ISO) %>%
-  group_by(`Country/Region/World`, Sex) %>%
-  summarise(`Mean diabetes prevalence` = mean(`Age-standardised diabetes prevalence`))
-  
-kable(Australia_table_summary, 
-             caption = "First Six Observations of the Full Diabetes Dataset",
-             digits = 3)
+```{r table3 }
+# group by country and rank means 
+data_country <- data_full %>%
+  group_by(`Country/Region/World`) %>%
+  summarise(mean_diabetes = mean(`Age-standardised diabetes prevalence`)) %>%
+  arrange(desc(mean_diabetes))
+
+# Create variable for first 10 rows 
+data_country_10 <- head(data_country,10)
+
+
+# create table
+kable(data_country_10, 
+             caption = "Top 10 Mean Diabetes Prevalence by Country",
+             digits = 3, 
+      row_number(10))
 ```
 
-Five random countries were selected to compare mean diabetes prevalence by year and sex. In Australia, Germany and United States of America, men have a higher mean diabetes prevalence than women. Mean diabetes prevalence for men and women in China are very similar with men being 0.001 higher. Interestingly, women in South Africa have a higher mean diabetes prevalence than men. 
+Each country was grouped to produce a mean diabetes prevalence and then were ranked to identify the top 10 countries. These countries include Nauru, American Samoa, Cook Islands, Palau, Niue, Tokelau, Tuvalu, French Polynesia, Marshall Islands and Tonga. The mean diabetes prevalence from 1980-2014 for these countries range from 16.2% to 28.7%. These countries/regions are located in the South Pacific and all have high risk of diabetes. 
 
 # Conclusions 
 
@@ -190,7 +195,8 @@ Five random countries were selected to compare mean diabetes prevalence by year 
 - The results for diabetes prevalence over time \@ref(DPT) were calculated from only 1000 entries of a full dataset containing 14,000 entries. 
     - Possible error could be due to the random generation of rows and skew results. 
 - Australian men have a higher mean diabetes prevalence than women \@ref(figure3)
-- Although Australian men have higher diabetes prevalence, it is not the case for all countries. For example South African women have a higher mean diabetes prevalence than men \@ref(table3). 
+- The global data indicates that Nauru had the highest mean diabetes prevalence for the period 1980-2014 \@ref(table3). 
+  - South Pacific islands indicate high risk of diabetes prevalence. 
 - Diabetes can cause life-threatening health complications, therefore identifying high prevalence groups can aid in prevention and treatment. 
     
 
